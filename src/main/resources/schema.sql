@@ -1,34 +1,55 @@
-drop table IF EXiSTS `task_log`;
-drop table IF EXiSTS `report`;
-drop table IF EXiSTS `user`;
-
-CREATE TABLE IF NOT EXISTS `user` (
-    `employee_code` int NOT NULL PRIMARY KEY,
-    `name` varchar(255) NOT NULL,
-    `password` char(64) NOT NULL,
-    `role` varchar(255) NOT NULL,
-    `icon` mediumblob
-);
-
-CREATE TABLE IF NOT EXISTS `report` (
-    `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `employee_code` int NOT NULL,
-    `condition` varchar(10) NOT NULL,
-    `impressions` text NOT NULL,
-    `tomorrow_schedule` text NOT NULL,
-    `date` date NOT NULL,
-    `start_time` time NOT NULL,
-    `end_time` time NOT NULL,
-    `is_lateness` tinyint NOT NULL,
-    `lateness_reason` text,
-    `is_left_early` tinyint NOT NULL,
-    FOREIGN KEY (`employee_code`) REFERENCES user(`employee_code`)
-);
-
-CREATE TABLE IF NOT EXISTS `task_log` (
-    `report_id` int NOT NULL,
-    `name` varchar(255) NOT NULL,
-    `progress_rate` tinyint NOT NULL,
-    FOREIGN KEY (`report_id`) REFERENCES report(`id`)
-);
+--drop table IF EXISTS `task_log`;
+--drop table IF EXISTS `report`;
+--drop table IF EXISTS `user`;
+--drop table If EXISTS `team`;
+--drop table If EXISTS `feedback`;
+--drop table If EXISTS `assignment`;
+--
+--CREATE TABLE IF NOT EXISTS `user` (
+--    `employee_code` int NOT NULL PRIMARY KEY,
+--    `name` varchar(255) NOT NULL,
+--    `password` char(64) NOT NULL,
+--    `role` varchar(255) NOT NULL,
+--    `icon` mediumblob
+--);
+--
+--CREATE TABLE IF NOT EXISTS `report` (
+--    `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+--    `employee_code` int NOT NULL,
+--    `condition_rate` int NOT NULL,
+--    `condition` varchar(50),
+--    `impressions` text NOT NULL,
+--    `tomorrow_schedule` text NOT NULL,
+--    `date` date NOT NULL,
+--    `start_time` time NOT NULL,
+--    `end_time` time NOT NULL,
+--    `is_lateness` tinyint NOT NULL,
+--    `lateness_reason` text,
+--    `is_left_early` tinyint NOT NULL,
+--    FOREIGN KEY (`employee_code`) REFERENCES user(`employee_code`)
+--);
+--
+--CREATE TABLE IF NOT EXISTS `task_log` (
+--    `report_id` int NOT NULL,
+--    `name` varchar(100) NOT NULL,
+--    `progress_rate` tinyint NOT NULL,
+--    FOREIGN KEY (`report_id`) REFERENCES report(`id`)
+--);
+--
+--CREATE TABLE IF NOT EXISTS `team` (
+--    `team_id` int NOT NULL,
+--    `name` varchar(30) NOT NULL
+--);
+--
+--CREATE TABLE IF NOT EXISTS `feedback` (
+--    `feedback_id` int NOT NULL,
+--    `name` varchar(255) NOT NULL,
+--    `rating` int NOT NULL,
+--    `comment` varchar(200)
+--);
+--
+--CREATE TABLE IF NOT EXISTS `assignment` (
+--    `assignment_id` int NOT NULL,
+--    `is_manager` tinyint(1) NOT NULL DEFAULT '0',
+--);
 

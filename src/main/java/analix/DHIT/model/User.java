@@ -54,4 +54,3 @@ public class User {
         return List.of(getRole());
     }
 }
-

@@ -76,7 +76,7 @@ public class ReportService {
 
         this.reportRepository.save(newReport);
 
-        return newReport.getId();
+        return newReport.getReportId();
 
     }
 

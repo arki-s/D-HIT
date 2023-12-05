@@ -97,15 +97,15 @@ public class MemberController {
         );
 
         // タスクが存在するならタスクログに追加
-        if (reportCreateInput.getTaskLogs() != null) {
-            List<TaskLog> taskLogs = reportCreateInput.getTaskLogs();
-            taskLogs.forEach(x -> x.setReportId(newReportId));
-            for (TaskLog taskLog : taskLogs) {
-                if (taskLog != null && taskLog.getName() != null) {
-                    taskLogService.create(taskLog);
-                }
-            }
-        }
+//        if (reportCreateInput.getTaskLogs() != null) {
+//            List<TaskLog> taskLogs = reportCreateInput.getTaskLogs();
+//            taskLogs.forEach(x -> x.setReportId(newReportId));
+//            for (TaskLog taskLog : taskLogs) {
+//                if (taskLog != null && taskLog.getName() != null) {
+//                    taskLogService.create(taskLog);
+//                }
+//            }
+//        }
 
         return "redirect:/member/report/create-completed";
     }
