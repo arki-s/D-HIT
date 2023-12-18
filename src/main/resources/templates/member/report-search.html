@@ -52,25 +52,14 @@
                     <tr>
                         <th>日付</th>
                         <th>体調</th>
-                        <th>削除</th>
+                        <th>詳細</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="report : ${reports}">
                         <td th:text="${report.date}"></td>
                         <td th:text="${report.condition}"></td>
-                        <td>
-<!--                            eachのフォーム一個目がなぜか表示されないため無理やりフォームを二つ並べています。他の解決方法があればそちらを利用予定。-->
-                            <form th:action="@{'reports/' + ${report.id} + '/delete/list'}" method="post" onSubmit="return check()">
-                                <input type="hidden" name="reportId" th:value="${report.id}" />
-                                <input type="hidden" value="削除" class="btn btn-outline-danger" />
-                            </form>
-                            <form th:action="@{'reports/' + ${report.id} + '/delete/list'}" method="post" onSubmit="return check()">
-                                <input type="hidden" name="reportId" th:value="${report.id}" />
-                                <input type="submit" value="削除" class="btn btn-outline-danger" />
-                            </form>
-<!--                            <a th:href="@{'reports/' + ${report.id} + '/delete/list'}" class="btn btn-outline-danger" onSubmit="return check()" >削除</a>-->
-                        </td>
+                        <td><a th:href="@{'reports/' + ${report.Id}}" class="btn btn-secondary">詳細</a></td>
                     </tr>
                     </tbody>
                 </table>
@@ -113,16 +102,120 @@
             }
 </style>
 <script layout:fragment="script"></script>
-
 </body>
 </html>
-<script>
-    function check() {
-        if (window.confirm('このチームを削除しますか？')) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
-</script>
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="ja" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+<!--    <title>業務報告書検索</title>-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-fcJ2ugqW37VczR6qn2uJZl+Jx2y/rqMlkGWO8jHv8FgtUd58MVBHu+PeNTY/GzLRdcwLW0DRUiFMtY5H1SvtsQ==" crossorigin="anonymous" />-->
+<!--    <style>-->
+<!--        -->
+<!--        .gap-2 {-->
+<!--            justify-content: center;-->
+<!--            width : 100%;-->
+<!--        }-->
+<!--        button.btn-lg {-->
+<!--            float : left ;-->
+<!--            text-align: center;-->
+<!--            white-space: nowrap;-->
+<!--            padding-left: 90px;-->
+<!--            padding-right: 90px;-->
+<!--        }-->
+<!--        @media (max-width: 768px) {-->
+<!--            h2.text-center.mb-4 {-->
+<!--                font-size: 1.3em;-->
+<!--            }-->
+<!--            .gap-2 {-->
+<!--                justify-content: center;-->
+<!--                width : 100%;-->
+<!--            }-->
+<!--            button.btn-lg {-->
+<!--                text-align: center;-->
+<!--                white-space: nowrap;-->
+<!--                padding-left: 40px;-->
+<!--                padding-right: 40px;-->
+<!--            }-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+
+<!--<body>-->
+
+<!--<div th:replace="member/navbar :: navbar"></div>-->
+
+<!--<div class="container mt-5">-->
+<!--    <h2 class="text-center mb-4">業務報告書検索</h2>-->
+
+<!--    <form action="#" th:action="@{/member/search-report}" th:object="${reportSearchInput}" method="post">-->
+<!--        <div class="mb-3">-->
+<!--            <label for="datePicker" class="form-label">日付</label>-->
+<!--            <input type="date" class="form-control" id="datePicker" name="date">-->
+<!--        </div>-->
+
+<!--        <div class="d-grid gap-2">-->
+<!--            <button type="submit" class="btn btn-primary btn-lg">検索</button>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--        <div class="mb-5"></div>-->
+<!--    <form th:action="@{/member/search-report}" th:object="${ReportSortInput}" method="post">-->
+<!--        <div>-->
+<!--            <h2 class="text-center mb-4">報告書一覧</h2>-->
+
+<!--            <div class="d-flex">-->
+<!--                <div class="mb-3">-->
+<!--                    <select  name="feedback">-->
+<!--                        <option th:value="${null}">選択してください。</option>-->
+<!--                        <option th:value="${true}">既読</option>-->
+<!--                        <option th:value="${false}">未読</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <div class="mb-3">-->
+<!--                    <select  name="date">-->
+<!--                        <option th:value="${null}">選択してください。</option>-->
+<!--                        <option th:each="date : ${dateList}"-->
+<!--                                th:value="${date}"-->
+<!--                                th:text="${#temporals.format(date,'yyyy-MM')}">-->
+<!--                        </option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <div >-->
+<!--                    <button type="submit" name="sort" th:value="${true}">検索</button>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <table class="table">-->
+<!--                <thead>-->
+<!--                    <tr>-->
+<!--                        <th>日付</th>-->
+<!--                        <th>体調</th>-->
+<!--                    </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                    <tr th:each="report : ${reports}">-->
+<!--                        <td th:text="${report.date}"></td>-->
+<!--                        <td th:text="${report.condition}"></td>-->
+<!--                    </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+<!--    </form>-->
+
+<!--        <div class="mb-5"></div>-->
+
+<!--        <div th:if="${error != null}" class="text-center mb-4">-->
+<!--            <h3 style="color: red;" th:text="${error}"></h3>-->
+<!--        </div>-->
+
+<!--</div>-->
+
+<!--&lt;!&ndash; Bootstrap JS (optional) &ndash;&gt;-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" integrity="sha512-PBfrtgyDZTjW5IZ09i/JGA2hpxVoP+ID2dFCiKjpb5AT7vSmhBlpG+k3ZvWCD1Mtr6Ve6tnEpEO8IQ8bXl9JMA==" crossorigin="anonymous"></script>-->
+
+<!--</body>-->
